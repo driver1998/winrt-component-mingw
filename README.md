@@ -2,11 +2,11 @@
 
 This is a demo of in-proc WinRT component on MinGW.
 
-# Why
+## Why
 
 To stress test the new C++/WinRT MinGW support mostly, also it is fun.
 
-# Build
+## Build
 
 To build this, you'll need the following:
 
@@ -33,11 +33,11 @@ cmake ..
 cmake --build .
 ```
 
-# Test
+## Test
 
 C++ and C# test programs are provided, and can be built and run normally.
 
-# Note about metadata
+## Notes about metadata
 
 Since the official MIDL 3.0 compiler `midl.exe` is proprietary, [CsWinMD](https://github.com/microsoft/CsWinRT/tree/2.0.7.240207.1/src/Authoring/cswinmd) from C#/WinRT is used as an alternative, which uses C# code to define components instead of IDL. 
 
