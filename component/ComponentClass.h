@@ -1,5 +1,5 @@
 #pragma once
-#include "MinGWComponent/ComponentClass.g.h"
+#include "ComponentClass.g.h"
 
 namespace winrt::MinGWComponent::implementation
 {

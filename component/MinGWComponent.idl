@@ -1,0 +1,16 @@
+
+namespace MinGWComponent {
+    [
+        version(1.0),
+        uuid(440edb27-141d-4de6-a91e-70d6e396d98c)
+    ]
+    interface IComponentClass {
+        Int32 IntProperty { get; };
+        Int32 Add(Int32 a, Int32 b);
+        Windows.Foundation.IAsyncOperation<Windows.Storage.Streams.IRandomAccessStream> DownloadFileAsync(String url);
+    }
+
+    runtimeclass ComponentClass : IComponentClass{
+        ComponentClass();
+    }
+}

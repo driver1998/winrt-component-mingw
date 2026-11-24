@@ -1,4 +1,4 @@
-#include "MinGWComponent.ComponentClass.h"
+#include "ComponentClass.h"
 
 #include <winrt/base.h>
 #include <winrt/Windows.Foundation.h>

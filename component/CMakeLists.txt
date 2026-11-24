@@ -18,13 +18,13 @@ set(CPPWINRT_OUTPUT_DIR "${CMAKE_BINARY_DIR}/cppwinrt")
 
 add_custom_command(
     OUTPUT
-        component.winmd
+        MinGWComponent.winmd
     COMMAND
-        ${CSWINMD_PATH} -i component.cs -a ${COMPONENT_NAMESPACE} -o ${CMAKE_BINARY_DIR}
+        Midl.Cli -winrt MinGWComponent.idl -no_header -reference ${CPPWINRT_INPUT} -out ${CMAKE_BINARY_DIR}
     WORKING_DIRECTORY
         ${CMAKE_CURRENT_SOURCE_DIR}
     DEPENDS
-        component.cs
+        MinGWComponent.idl
     COMMENT
         "Generating Metadata...")
 
@@ -32,7 +32,7 @@ add_custom_command(
     OUTPUT
         ${CPPWINRT_OUTPUT_DIR}/winrt/base.h
     COMMAND
-        cppwinrt.exe -pch . -input ${CPPWINRT_INPUT} -output ${CPPWINRT_OUTPUT_DIR}
+        cppwinrt -pch . -input ${CPPWINRT_INPUT} -output ${CPPWINRT_OUTPUT_DIR}
     WORKING_DIRECTORY
         ${CMAKE_CURRENT_SOURCE_DIR}
     COMMENT
@@ -42,21 +42,21 @@ add_custom_command(
     OUTPUT
         ${CPPWINRT_OUTPUT_DIR}/module.g.cpp
     COMMAND
-        cppwinrt.exe -pch . -input ${CMAKE_BINARY_DIR}/component.winmd -reference ${CPPWINRT_INPUT} -component stub -output ${CPPWINRT_OUTPUT_DIR}
+        cppwinrt -pch . -input ${CMAKE_BINARY_DIR}/MinGWComponent.winmd -reference ${CPPWINRT_INPUT} -component stub -output ${CPPWINRT_OUTPUT_DIR}
     COMMAND
-        cppwinrt.exe -pch . -input ${CMAKE_BINARY_DIR}/component.winmd -reference ${CPPWINRT_INPUT} -output ${CPPWINRT_OUTPUT_DIR}
+        cppwinrt -pch . -input ${CMAKE_BINARY_DIR}/MinGWComponent.winmd -reference ${CPPWINRT_INPUT} -output ${CPPWINRT_OUTPUT_DIR}
     WORKING_DIRECTORY
         ${CMAKE_CURRENT_SOURCE_DIR}
     DEPENDS
-        ${CMAKE_BINARY_DIR}/component.winmd
+        ${CMAKE_BINARY_DIR}/MinGWComponent.winmd
     COMMENT
         "Generating Component implementation stub...")
 
 set(SOURCES
     ${CPPWINRT_OUTPUT_DIR}/module.g.cpp
     ${CPPWINRT_OUTPUT_DIR}/winrt/base.h
-    MinGWComponent.ComponentClass.cpp
-    MinGWComponent.ComponentClass.h
+    ComponentClass.cpp
+    ComponentClass.h
     component.def)
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES})

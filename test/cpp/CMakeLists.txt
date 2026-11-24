@@ -17,7 +17,7 @@ endif()
 
 set(CPPWINRT_INPUT 
     "../../references/Windows.winmd"
-    "../../component/build/component.winmd")
+    "../../component/build/MinGWComponent.winmd")
 set(CPPWINRT_OUTPUT_DIR "${CMAKE_BINARY_DIR}/cppwinrt")
 
 file(COPY ../../component/build/libmingw-component.dll DESTINATION ${CMAKE_BINARY_DIR})
@@ -26,7 +26,7 @@ add_custom_command(
     OUTPUT
         ${CPPWINRT_OUTPUT_DIR}/winrt/base.h
     COMMAND
-        cppwinrt.exe -pch . -input ${CPPWINRT_INPUT} -output ${CPPWINRT_OUTPUT_DIR}
+        cppwinrt -pch . -input ${CPPWINRT_INPUT} -output ${CPPWINRT_OUTPUT_DIR}
     WORKING_DIRECTORY
         ${CMAKE_CURRENT_SOURCE_DIR}
     COMMENT
